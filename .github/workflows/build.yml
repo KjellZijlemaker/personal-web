@@ -33,13 +33,11 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.ARTIFACT_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p 22 -t ed25519 ${{ secrets.ARTIFACT_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to server or Storage Box
-        run: |
-          rsync -azP -e "ssh -i $HOME/.ssh/id_ed25519 -p 22" ./action_image_artifact_docker.io_library_personal-web-djangoapp ${{ secrets.ARTIFACT_USERNAME }}@${{ secrets.ARTIFACT_HOST }}:~/action_image_artifact_docker.io_library_personal-web-djangoapp
+
+      # - name: Deploy to server or Storage Box
+      #   run: |
+      #     rsync -azP -e "ssh -i $HOME/.ssh/id_ed25519 -p 22" ./action_image_artifact_docker.io_library_personal-web-djangoapp ${{ secrets.ARTIFACT_USERNAME }}@${{ secrets.ARTIFACT_HOST }}:~/action_image_artifact_docker.io_library_personal-web-djangoapp
 
 
 
