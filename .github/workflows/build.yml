@@ -15,7 +15,7 @@ jobs:
       - name: Docker Compose Action
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "../../.docker/docker-compose.yml"
+          compose-file: ".docker/docker-compose.yml"
       - name: Docker nginx artifact upload
         uses: ishworkh/docker-image-artifact-upload@v2.1.0
         with:
