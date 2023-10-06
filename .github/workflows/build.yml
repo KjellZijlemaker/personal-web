@@ -6,7 +6,7 @@ on:
         - 'feature/add_actions'
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,7 +23,10 @@ jobs:
       - name: Docker django artifact upload
         uses: ishworkh/docker-image-artifact-upload@v2.1.0
         with:
-          image: "personal-web_djangoapp"
+          image: "docker.io/library/personal-web-djangoapp"
+
+
+
       
             
             
