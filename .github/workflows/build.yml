@@ -23,7 +23,7 @@ jobs:
       - name: Docker django artifact upload
         uses: ishworkh/docker-image-artifact-upload@v2.1.0
         with:
-          image: "personal-web_djangoapp:latest"
+          image: "personal-web_djangoapp"
       
             
             
