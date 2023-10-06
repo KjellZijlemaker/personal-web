@@ -27,6 +27,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    depends-on: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
