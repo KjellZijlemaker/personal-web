@@ -1,0 +1,26 @@
+#Sample CD file
+name: Build django app
+on: 
+  push:
+    branches: 
+        - 'dev'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Compose Action
+        uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "../../.docker/docker-compose.yml"
+      - name: Docker nginx artifact upload
+        uses: ishworkh/docker-image-artifact-upload@v2.1.0
+        with:
+          image: "pagespeed/nginx-pagespeed:latest"
+      - name: Docker django artifact upload
+        uses: ishworkh/docker-image-artifact-upload@v2.1.0
+        with:
+          image: "personal-web_djangoapp:latest"
+      
+            
+            
