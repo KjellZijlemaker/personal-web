@@ -3,7 +3,7 @@ name: Build django app
 on: 
   push:
     branches: 
-        - 'dev'
+        - 'feature/add_actions'
 
 jobs:
   deploy:
