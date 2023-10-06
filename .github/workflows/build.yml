@@ -6,35 +6,34 @@ on:
         - 'feature/add_actions'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
           
-      - name: Docker Compose Action
-        uses: isbang/compose-action@v1.5.1
-        with:
-          compose-file: "docker-compose.yml"
-      - name: Docker nginx artifact upload
-        uses: ishworkh/docker-image-artifact-upload@v2.1.0
-        with:
-          image: "pagespeed/nginx-pagespeed:latest"
-      - name: Docker django artifact upload
-        uses: ishworkh/docker-image-artifact-upload@v2.1.0
-        with:
-          image: "docker.io/library/personal-web-djangoapp"
+  #     - name: Docker Compose Action
+  #       uses: isbang/compose-action@v1.5.1
+  #       with:
+  #         compose-file: "docker-compose.yml"
+  #     - name: Docker nginx artifact upload
+  #       uses: ishworkh/docker-image-artifact-upload@v2.1.0
+  #       with:
+  #         image: "pagespeed/nginx-pagespeed:latest"
+  #     - name: Docker django artifact upload
+  #       uses: ishworkh/docker-image-artifact-upload@v2.1.0
+  #       with:
+  #         image: "docker.io/library/personal-web-djangoapp"
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    # needs: build
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up SSH key
         run: |
-          env
           mkdir -p ~/.ssh
           echo "${{ secrets.ARTIFACT_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
