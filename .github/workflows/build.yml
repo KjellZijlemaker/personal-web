@@ -5,8 +5,7 @@ on:
   push:
     branches: 
         - 'feature/add_actions'
-    tags: 
-        - [ v* ]
+    tags: [ v* ]
 
 env:
   REGISTRY: docker.io
