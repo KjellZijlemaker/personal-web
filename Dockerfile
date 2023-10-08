@@ -1,6 +1,8 @@
 # start from an official image
 FROM python:3.11
 
+LABEL name="personalwebsite"
+
 ENV ENV=PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
   PYTHONHASHSEED=random \
