@@ -4,6 +4,11 @@ on:
   push:
     branches: 
         - 'feature/add_actions'
+    tags: [ v* ]
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: personalwebsite
 
 jobs:
   build:
@@ -21,6 +26,7 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
+          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -29,13 +35,20 @@ jobs:
         with:
           compose-file: "docker-compose.yml"
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: kjellzijlemaker/personalwebsite:"${{  github.ref_name }}"
 
+    - name: Extract metadata for the Docker image
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+    - name: Build and push the Docker image
+      uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      with:
+        context: .
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
        
 
   # deploy:
