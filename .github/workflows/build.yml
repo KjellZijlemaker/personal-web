@@ -33,8 +33,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: kjellzijlemaker/personalwebsite:$GITHUB_REF_NAME
-
+          tags: kjellzijlemaker/personalwebsite:"${{  github.ref_name }}"
 
 
        
