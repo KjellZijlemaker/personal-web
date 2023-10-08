@@ -10,6 +10,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: personalwebsite
+  USERNAME: kjellzijlemaker
 
 jobs:
   build:
@@ -31,17 +32,17 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker Compose Action
-        uses: isbang/compose-action@v1.5.1
-        with:
-          compose-file: "docker-compose.yml"
+      # - name: Docker Compose Action
+      #   uses: isbang/compose-action@v1.5.1
+      #   with:
+      #     compose-file: "docker-compose.yml"
 
 
       - name: Extract metadata for the Docker image
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push the Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -57,19 +58,14 @@ jobs:
   #   # needs: build
   #   steps:
 
-  #     - name: Set up SSH key
-  #       run: |
-  #         mkdir -p ~/.ssh
-  #         echo "${{ secrets.ARTIFACT_SSH_KEY }}" > ~/.ssh/id_ed25519
-  #         chmod 600 ~/.ssh/id_ed25519
-  #         ssh-keyscan -p 22 -t ed25519 ${{ secrets.ARTIFACT_HOST }} >> ~/.ssh/known_hosts
-
-  #     # - name: Deploy to server or Storage Box
-  #     #   run: |
-  #     #     rsync -azP -e "ssh -i $HOME/.ssh/id_ed25519 -p 22" ./action_image_artifact_docker.io_library_personal-web-djangoapp ${{ secrets.ARTIFACT_USERNAME }}@${{ secrets.ARTIFACT_HOST }}:~/action_image_artifact_docker.io_library_personal-web-djangoapp
+  #     - name: Run Docker
+  #     - name: Run docker compose
+  #       uses: jawher/action-hcloud@v1.37.0
+  #       env:
+  #         HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
+  #       with:
+  #         args: docker-compose up -d
 
 
-
-      
             
             
