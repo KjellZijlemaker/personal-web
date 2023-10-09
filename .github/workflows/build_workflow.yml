@@ -15,8 +15,8 @@ jobs:
 
       - name: Run black
         run: |
-          black /personal-web --check
+          black . --check
 
       - name: Run tests
         run: |
-          pytest /personal-web/tests
+          pytest . -v --junitxml="result.xml"
