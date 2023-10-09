@@ -58,7 +58,7 @@ jobs:
           key: ${{ secrets.ARTIFACT_SSH_KEY }}
           port: 22
           script: |
-            cd personalwebsite
+            cd personal-web
             git checkout ${{ github.ref }}
             git pull origin ${{ github.ref }}
             docker login ${{ env.REGISTRY }} --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_VM_TOKEN }}
