@@ -1,3 +1,18 @@
-on:
-  pull_request:
-    types: [opened, reopened]
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: psf/black@stable
+        with:
+          options: "--check --verbose"
+          src: "./personalwebsite"
+          jupyter: true
+          version: "21.5b1"
+      - name: Run tests
+        run: |
+          poetry run pytest ./personalwebsite/tests
