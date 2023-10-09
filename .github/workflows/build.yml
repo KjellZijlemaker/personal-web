@@ -65,9 +65,6 @@ jobs:
             git pull origin ${{ github.ref }}
             docker login ${{ env.REGISTRY }} --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_VM_TOKEN }}
 
+            docker-compose -f docker-compose.prd.yml down -v
             docker-compose -f docker-compose.prd.yml pull 
             docker-compose -f docker-compose.prd.yml up -d 
-        
-
-            
-            
