@@ -20,13 +20,10 @@ inputs:
   DOCKERHUB_VM_TOKEN:
     description: 'A token to use for authentication with the registry'
     required: true
-    
+
 runs:
   using: "composite"
   steps:
-  - name: Checkout repository
-    uses: actions/checkout@v3
-
   - name: Deploy Stack
     uses: appleboy/ssh-action@master
     with:
