@@ -2,7 +2,7 @@ version: "3"
 
 services:
   djangoapp:
-    image: kjellzijlemaker/personalwebsite:latest
+    image: kjellzijlemaker/personalwebsite:feature-add_actions
     ports:
       - 8000:8000
     volumes:
@@ -13,8 +13,7 @@ services:
       - nginx_network
 
   nginx:
-    image: pagespeed/nginx-pagespeed:latest
-    platform: linux/x86_64
+    image: arm64v8/nginx
     ports:
       - 80:80
     volumes:

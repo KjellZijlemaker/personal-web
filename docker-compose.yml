@@ -13,8 +13,7 @@ services:
       - nginx_network
 
   nginx:
-    image: pagespeed/nginx-pagespeed:latest
-    platform: linux/x86_64
+    image: arm64v8/nginx
     ports:
       - 80:80
     volumes:
