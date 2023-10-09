@@ -14,10 +14,11 @@ services:
 
   nginx:
     image: pagespeed/nginx-pagespeed:latest
+    platform: linux/x86_64
     ports:
       - 80:80
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - .nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/opt/services/djangoapp/static  # <-- bind the static volume
       - media_volume:/opt/services/djangoapp/media  # <-- bind the media volume
     depends_on:
