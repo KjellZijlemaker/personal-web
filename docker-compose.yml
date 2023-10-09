@@ -2,6 +2,7 @@ version: "3"
 
 services:
   djangoapp:
+    platform: linux/amd64
     build: .
     ports:
       - 8000:8000
@@ -13,6 +14,7 @@ services:
       - nginx_network
 
   nginx:
+    platform: linux/amd64
     image: pagespeed/nginx-pagespeed:latest
     ports:
       - 80:80
