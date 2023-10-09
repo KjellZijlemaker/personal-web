@@ -4,7 +4,7 @@ name: Build django app
 on: 
   push:
     branches: 
-        - 'feature/add_actions'
+        - 'main'
     tags: [ v* ]
 
 env:
