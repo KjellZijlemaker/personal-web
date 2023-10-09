@@ -1,5 +1,5 @@
 #Sample CD file
-name: Build django app
+name: Build and Deploy personal website
 
 on: 
   push:
@@ -50,7 +50,7 @@ jobs:
           
       - name: Minor version for each merge
         id: taggerFinal
-        uses: anothrNick/github-tag-action@1.36.0
+        uses: cn@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
           WITH_V: true
