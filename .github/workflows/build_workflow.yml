@@ -15,8 +15,8 @@ jobs:
 
       - name: Run black
         run: |
-          black /kjellzijlemaker/personal-web --check
+          black /personal-web --check
 
       - name: Run tests
         run: |
-          pytest /kjellzijlemaker/personal-web/tests
+          pytest /personal-web/tests
