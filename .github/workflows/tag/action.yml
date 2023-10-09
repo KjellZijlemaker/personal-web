@@ -18,13 +18,16 @@ runs:
         DRY_RUN: true
 
     - name: echo new tag
+      shell: bash
       run: |
         echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
 
     - name: echo tag
+      shell: bash
       run: |
         echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
-        
+
     - name: echo part
+      shell: bash
       run: |
         echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
