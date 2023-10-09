@@ -1,5 +1,11 @@
 name: "Auto tag application"
 description: "Auto tag application"
+
+inputs:
+  DOCKERHUB_TOKEN:
+    description: 'A token to use for authentication with the registry'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -10,7 +16,7 @@ runs:
       id: taggerDryRun
       uses: anothrNick/github-tag-action@1.36.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
         WITH_V: true
         DRY_RUN: true
 

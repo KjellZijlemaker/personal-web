@@ -1,24 +1,45 @@
 name: "Deploy Stack"
 description: "Deploy Stack"
+
+inputs:
+  ARTIFACT_HOST:
+    description: 'The host to log in to'
+    required: true
+  ARTIFACT_USERNAME:
+    description: 'The username to log in as'
+    required: true
+  ARTIFACT_SSH_KEY:
+    description: 'The ssh key to log in as'
+    required: true
+  REGISTRY:
+    description: 'The registry to log in to'
+    required: true
+  DOCKERHUB_USERNAME:
+    description: 'The username to log in as'
+    required: true
+  DOCKERHUB_VM_TOKEN:
+    description: 'A token to use for authentication with the registry'
+    required: true
+    
 runs:
   using: "composite"
   steps:
   - name: Checkout repository
     uses: actions/checkout@v3
-    
+
   - name: Deploy Stack
     uses: appleboy/ssh-action@master
     with:
-      host: ${{ secrets.ARTIFACT_HOST }}
-      username: ${{ secrets.ARTIFACT_USERNAME }}
-      key: ${{ secrets.ARTIFACT_SSH_KEY }}
+      host: ${{ inputs.ARTIFACT_HOST }}
+      username: ${{ inputs.ARTIFACT_USERNAME }}
+      key: ${{ inputs.ARTIFACT_SSH_KEY }}
       port: 22
       script: |
         cd personal-web
         git checkout ${{ github.ref }}
         git stash
         git pull origin ${{ github.ref }}
-        docker login ${{ env.REGISTRY }} --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_VM_TOKEN }}
+        docker login ${{ inputs.REGISTRY }} --username ${{ inputs.DOCKERHUB_USERNAME }} --password ${{ inputs.DOCKERHUB_VM_TOKEN }}
 
         docker-compose -f docker-compose.prd.yml down -v
         docker-compose -f docker-compose.prd.yml pull 
