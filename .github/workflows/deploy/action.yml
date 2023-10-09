@@ -3,6 +3,9 @@ description: "Deploy Stack"
 runs:
   using: "composite"
   steps:
+  - name: Checkout repository
+    uses: actions/checkout@v3
+    
   - name: Deploy Stack
     uses: appleboy/ssh-action@master
     with:

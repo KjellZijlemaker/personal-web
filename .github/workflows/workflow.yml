@@ -17,16 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/composite-action/build.yml
+      - uses: ./.github/workflows/build
   tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/composite-action/tag.yml
+      - uses: ./.github/workflows/tag
   deploy:
     runs-on: ubuntu-latest
     concurrency: production
     steps:
-      - uses: ./.github/workflows/composite-action/deploy.yml
+      - uses: ./.github/workflows/deploy
       - name: Minor version for each merge
         id: taggerFinal
         uses: anothrNick/github-tag-action@1.36.0
