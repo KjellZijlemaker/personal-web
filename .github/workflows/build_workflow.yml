@@ -13,12 +13,9 @@ jobs:
           pip install black==21.5b1
           pip install pytest==6.2.4
 
-      - uses: psf/black@stable
-        with:
-          options: "--check --verbose"
-          src: "./personalwebsite"
-          jupyter: true
-          version: "21.5b1"
+      - name: Run black
+        run: |
+          black ./personalwebsite --check
 
       - name: Run tests
         run: |
