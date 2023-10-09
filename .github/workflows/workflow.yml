@@ -1,0 +1,35 @@
+#Sample CD file
+name: Build django app
+
+on: 
+  push:
+    branches: 
+        - 'feature/add_actions'
+    tags: [ v* ]
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: personalwebsite
+  USERNAME: kjellzijlemaker
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+      - uses: ./.github/workflows/composite-action/build.yml
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/composite-action/tag.yml
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency: production
+    steps:
+      - uses: ./.github/workflows/composite-action/deploy.yml
+      - name: Minor version for each merge
+        id: taggerFinal
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true

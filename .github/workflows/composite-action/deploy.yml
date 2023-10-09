@@ -1,0 +1,22 @@
+name: "Deploy Stack"
+description: "Deploy Stack"
+runs:
+  using: "composite"
+  steps:
+  - name: Deploy Stack
+    uses: appleboy/ssh-action@master
+    with:
+      host: ${{ secrets.ARTIFACT_HOST }}
+      username: ${{ secrets.ARTIFACT_USERNAME }}
+      key: ${{ secrets.ARTIFACT_SSH_KEY }}
+      port: 22
+      script: |
+        cd personal-web
+        git checkout ${{ github.ref }}
+        git stash
+        git pull origin ${{ github.ref }}
+        docker login ${{ env.REGISTRY }} --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_VM_TOKEN }}
+
+        docker-compose -f docker-compose.prd.yml down -v
+        docker-compose -f docker-compose.prd.yml pull 
+        docker-compose -f docker-compose.prd.yml up -d 
