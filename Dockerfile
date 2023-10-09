@@ -21,7 +21,7 @@ COPY poetry.lock pyproject.toml /opt/services/djangoapp/src/
 
 # Project initialization:
 RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction
+  && poetry install --no-interaction --no-ansi
 
 # copy our project code
 COPY . /opt/services/djangoapp/src
