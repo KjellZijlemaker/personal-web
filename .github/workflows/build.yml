@@ -65,6 +65,7 @@ jobs:
             docker login ${{ env.REGISTRY }} --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_VM_TOKEN }}
 
             docker-compose -f docker-compose.prd.yml pull 
+            docker-compose up -d
         
 
             
