@@ -19,4 +19,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest . -v --junitxml="result.xml"
+          ./manage.py test kjellzijlemaker/personalwebsite/tests
