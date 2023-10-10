@@ -1,4 +1,4 @@
-name: Lint
+name: Prebuild personal website
 
 on: [pull_request]
 
