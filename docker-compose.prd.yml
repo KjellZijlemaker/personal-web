@@ -2,7 +2,7 @@ version: "3"
 
 services:
   djangoapp:
-    build: .
+    image: kjellzijlemaker/personalwebsite:latest
     ports:
       - 8000:8000
     volumes:

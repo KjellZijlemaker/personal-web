@@ -1,0 +1,33 @@
+name: "Auto tag application"
+description: "Auto tag application"
+
+inputs:
+  DOCKERHUB_TOKEN:
+    description: 'A token to use for authentication with the registry'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Minor version for each merge
+      id: taggerDryRun
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+        WITH_V: true
+        DRY_RUN: true
+
+    - name: echo new tag
+      shell: bash
+      run: |
+        echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
+
+    - name: echo tag
+      shell: bash
+      run: |
+        echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
+
+    - name: echo part
+      shell: bash
+      run: |
+        echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
