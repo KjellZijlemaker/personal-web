@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "3.11.3"
-django = "4.2.6"
+django = "4.2.7"
 uvicorn = "0.23.2"
 gunicorn = "21.2.0"
 
