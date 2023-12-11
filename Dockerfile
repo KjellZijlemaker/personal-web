@@ -1,5 +1,5 @@
 # start from an official image
-FROM python:3.11.3
+FROM python:3.12.1
 
 ENV ENV=PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
