@@ -6,7 +6,7 @@ authors = ["Kjell Zijlemaker <k.zijlemaker@amsterdam.nl>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.3"
+python = "3.12.2"
 django = "4.2.10"
 uvicorn = "0.23.2"
 gunicorn = "21.2.0"
